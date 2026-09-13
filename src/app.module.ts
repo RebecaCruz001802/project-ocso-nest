@@ -6,6 +6,7 @@ import { ProductsModule } from './products/products.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './products/entities/product.entity';
+import { Employee } from './employees/entities/employee.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { Product } from './products/entities/product.entity';
       username: "postgres",
       password: "TheBestPassword",
       database: "ocsoDB",
-      entities: [Product],
+      entities: [Product, Employee],
       synchronize: true,
     }),
     EmployeesModule,
