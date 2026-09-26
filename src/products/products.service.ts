@@ -36,18 +36,23 @@ export class ProductsService {
   }
 
   async findByProvider(id: string) {
-    const productsFound = await this.productRepository.find({
-      where: {
-        provider: {
-          providerId: id,
-        },
+  const productsFound = await this.productRepository.find({
+    where: {
+      provider: {
+        providerId: id,
       },
-    });
-    if (productsFound.length === 0) {
-      throw new NotFoundException(`No hay productos para el proveedor ${id}`);
-    }
-    return productsFound;
+    },
+    relations: {
+      provider: true,
+    },
+  });
+
+  if (productsFound.length === 0) {
+    throw new NotFoundException(`No hay productos para el proveedor ${id}`);
   }
+
+  return productsFound;
+}
 
   async update(id: string, updateProductDto: UpdateProductDto) {
     const { provider, ...productDetails } = updateProductDto;
