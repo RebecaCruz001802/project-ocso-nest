@@ -4,16 +4,16 @@ import { Manager } from "../entities/manager.entity";
 export class CreateManagerDto extends Manager {
   @IsString()
   @MaxLength(80)
-  managerFullName: string;
+  declare managerFullName: string;
 
   @IsString()
   @IsEmail()
-  managerEmail: string;
+  declare managerEmail: string;
 
   @IsNumber()
-  managerSalary: number;
+  declare managerSalary: number;
 
   @IsString()
   @MaxLength(16)
-  managerPhoneNumber: string;
+  declare managerPhoneNumber: string;
 }

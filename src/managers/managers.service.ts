@@ -1,3 +1,4 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateManagerDto } from './dto/create-manager.dto';
 import { UpdateManagerDto } from './dto/update-manager.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -16,27 +17,29 @@ export class ManagersService {
   }
 
   findAll() {
-    return this.managerRepository.find()
+    return this.managerRepository.find();
   }
 
-  findOne(id: string) {
-    const manager = this.managerRepository.findOneBy({
+  async findOne(id: string) {
+    const manager = await this.managerRepository.findOneBy({
       managerId: id
-    })
-    if (!manager) throw new NotFoundException("No manager found")
+    });
+    if (!manager) throw new NotFoundException("No manager found");
+    return manager;
   }
 
   async update(id: string, updateManagerDto: UpdateManagerDto) {
     const managerToUpdate = await this.managerRepository.preload({
       managerId: id,
       ...updateManagerDto
-    })
-    return this.managerRepository.save(managerToUpdate)
+    });
+    if (!managerToUpdate) throw new NotFoundException("No manager found");
+    return this.managerRepository.save(managerToUpdate);
   }
 
   remove(id: string) {
     return this.managerRepository.delete({
       managerId: id
-    })
+    });
   }
 }
