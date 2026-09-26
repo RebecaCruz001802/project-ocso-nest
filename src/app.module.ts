@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './products/entities/product.entity';
 import { Employee } from './employees/entities/employee.entity';
+import { ProvidersModule } from './providers/providers.module';
 
 @Module({
   imports: [
@@ -18,11 +19,12 @@ import { Employee } from './employees/entities/employee.entity';
       username: "postgres",
       password: "TheBestPassword",
       database: "ocsoDB",
-      entities: [Product, Employee],
+      autoLoadEntities: true,
       synchronize: true,
     }),
     EmployeesModule,
     ProductsModule,
+    ProvidersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

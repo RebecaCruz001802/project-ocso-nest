@@ -19,5 +19,5 @@ export class CreateProductDto {
   @IsString()
   @IsUUID()
   @IsOptional()
-  provider: string;
+  provider?: string;
 }
