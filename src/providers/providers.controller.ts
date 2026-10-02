@@ -7,6 +7,7 @@ import { UserData } from '../auth/decorators/user.decorator';
 import { User } from '../auth/entities/user.entity';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 
 @Controller('providers')
@@ -18,8 +19,7 @@ export class ProvidersController {
     return this.providersService.create(createProviderDto);
   }
 
-  @Roles(['Admin'])
-  @UseGuards(AuthGuard, RolesGuard)
+  @Auth('Employee')
   @Get()
   findAll(@UserData() user: User) {
     if (user.userRoles.includes("Employee")) {
