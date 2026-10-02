@@ -13,8 +13,7 @@ import { LocationsModule } from './locations/locations.module';
 import { RegionsModule } from './regions/regions.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
-import { JWT_KEY } from './auth/jwt.constants'; 
-import { EXPIRES_IN } from './auth/jwt.constants'; 
+import { JWT_KEY, EXPIRES_IN } from './auth/constants/jwt.constants';
 
 @Module({
   imports: [
