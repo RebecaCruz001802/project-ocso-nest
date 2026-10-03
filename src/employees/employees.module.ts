@@ -3,10 +3,12 @@ import { EmployeesService } from './employees.service';
 import { EmployeesController } from './employees.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Employee } from './entities/employee.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Employee])
+    TypeOrmModule.forFeature([Employee]),
+    JwtModule,
   ],
   controllers: [EmployeesController],
   providers: [EmployeesService],
