@@ -1,10 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
-import {v4 as uuid} from 'uuid';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Employee } from './entities/employee.entity';
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 
 @Injectable()
 export class EmployeesService {
@@ -14,37 +13,35 @@ export class EmployeesService {
   ) {}
 
   async create(createEmployeeDto: CreateEmployeeDto) {
-    const employee = await this.employeeRepository.save(createEmployeeDto);
-    return employee;
+    const employee = this.employeeRepository.create(createEmployeeDto as DeepPartial<Employee>);
+    return await this.employeeRepository.save(employee);
   }
 
   findAll() {
     return this.employeeRepository.find();
   }
 
- findOne(id: string) {
-    const employee = this.employeeRepository.findOneBy({
+  findOne(id: string) {
+    return this.employeeRepository.findOneBy({
       employeeId: id,
     });
-    return employee;
   }
 
- async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
+  async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
     const employeeToUpdate = await this.employeeRepository.preload({
       employeeId: id,
-      ...updateEmployeeDto,
+      ...(updateEmployeeDto as DeepPartial<Employee>),
     });
     if (!employeeToUpdate) throw new NotFoundException();
-    this.employeeRepository.save(employeeToUpdate);
-    return employeeToUpdate;
+    return await this.employeeRepository.save(employeeToUpdate);
   }
 
-  remove(id: string) {
-    this.employeeRepository.delete({
+  async remove(id: string) {
+    await this.employeeRepository.delete({
       employeeId: id
-    })
+    });
     return {
       message: "Employee deleted"
-    }
+    };
   }
 }
