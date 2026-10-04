@@ -7,6 +7,7 @@ export class Manager {
   @PrimaryGeneratedColumn('uuid')
   managerId: string;
 
+  
   @Column('text')
   managerFullName: string;
 

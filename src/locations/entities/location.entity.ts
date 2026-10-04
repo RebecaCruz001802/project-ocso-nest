@@ -2,18 +2,28 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGene
 import { Manager } from "../../managers/entities/manager.entity"; 
 import { Region } from "../../regions/entities/region.entity";
 import { Employee } from "../../employees/entities/employee.entity"; // Ajusta la ruta si difiere en tu proyecto
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class Location {
   @PrimaryGeneratedColumn('increment')
   locationId: number;
 
-  @Column('text')
-  locationName: string;
+  @ApiProperty({
+  default: "OCSO Juriquilla"
+})
+@Column('text')
+locationName: string;
 
-  @Column('text')
-  locationAddress: string;
+@ApiProperty({
+  default: "Avenida Tal, S/N, 76220"
+})
+@Column('text')
+locationAddress: string;
 
+@ApiProperty({
+  default: [12, 12]
+})
   @Column('float', { array: true })
   locationLatLng: number[];
 
