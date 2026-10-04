@@ -25,7 +25,7 @@ export class AuthService {
       where: { userEmail: loginUserDto.userEmail },
     });
 
-    if (!user) throw new UnauthorizedException("No estas autorizado");
+    if (!user) throw new UnauthorizedException("El correo electrónico no está registrado");
 
     const match = await bcrypt.compare(
       loginUserDto.userPassword,

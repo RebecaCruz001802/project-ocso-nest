@@ -18,12 +18,27 @@ export class EmployeesService {
   }
 
   findAll() {
-    return this.employeeRepository.find();
+    return this.employeeRepository.find({
+      relations: {
+        location: true,
+      },
+    });
+  }
+
+  findByLocation(id: number) {
+    return this.employeeRepository.findBy({
+      location: {
+        locationId: id,
+      },
+    });
   }
 
   findOne(id: string) {
-    return this.employeeRepository.findOneBy({
-      employeeId: id,
+    return this.employeeRepository.findOne({
+      where: { employeeId: id },
+      relations: {
+        location: true,
+      },
     });
   }
 
@@ -38,10 +53,10 @@ export class EmployeesService {
 
   async remove(id: string) {
     await this.employeeRepository.delete({
-      employeeId: id
+      employeeId: id,
     });
     return {
-      message: "Employee deleted"
+      message: "Employee deleted",
     };
   }
 }

@@ -13,7 +13,7 @@ employeeName: string;
   @Column('text')
   employeeLastName: string;
 
-  @Column('text')
+  @Column('text') 
   employeePhoneNumber: string;
 
   @Column('text', {

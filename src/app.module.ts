@@ -28,7 +28,7 @@ import { JWT_KEY, EXPIRES_IN } from './auth/constants/jwt.constants';
       database: "ocsoDB",
       autoLoadEntities: true,
       synchronize: true,
-      dropSchema: true,
+      dropSchema: false,
     }),
     EmployeesModule,
     ProductsModule,
