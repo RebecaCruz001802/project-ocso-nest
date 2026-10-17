@@ -20,6 +20,6 @@ userPassword: string;
 })
   @IsOptional()
   @IsArray()
-  @IsIn(["Admin", "Employee", "Manager"])
+  @IsIn(["Admin", "Employee", "Manager"], { each: true })
   userRoles: string[];
 }
