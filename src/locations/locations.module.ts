@@ -4,11 +4,11 @@ import { LocationsController } from './locations.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Location } from './entities/location.entity';
 import { JwtModule } from '@nestjs/jwt';
+import { Manager } from '../managers/entities/manager.entity';
+import { ManagersModule } from '../managers/managers.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Location]),
-  JwtModule.register({}),
-],
+  imports: [TypeOrmModule.forFeature([Location, Manager]), ManagersModule, JwtModule],
   controllers: [LocationsController],
   providers: [LocationsService],
 })

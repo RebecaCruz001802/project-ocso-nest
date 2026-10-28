@@ -6,10 +6,7 @@ import { Manager } from './entities/manager.entity';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Manager]),
-    JwtModule.register({}),
-  ],
+  imports: [TypeOrmModule.forFeature([Manager]), JwtModule],
   controllers: [ManagersController],
   providers: [ManagersService],
 })

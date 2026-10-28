@@ -1,5 +1,6 @@
 import { ArrayNotEmpty, IsArray, IsNumber, IsObject, IsOptional, IsString, MaxLength } from "class-validator";
 import { Region } from "../../regions/entities/region.entity";
+import { Manager } from "../../managers/entities/manager.entity";
 
 export class CreateLocationDto {
   @IsOptional()
@@ -21,4 +22,8 @@ export class CreateLocationDto {
   @IsObject()
   @IsOptional()
   region: Region;
+
+  @IsObject()
+  @IsOptional()
+  manager: Manager;
 }
