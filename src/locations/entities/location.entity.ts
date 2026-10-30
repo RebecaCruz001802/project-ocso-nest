@@ -27,10 +27,9 @@ locationAddress: string;
   @Column('float', { array: true })
   locationLatLng: number[];
 
-  @OneToOne(() => Manager,{
-    eager:true,
+    @OneToOne(() => Manager, (manager) => manager.location, {
+    eager: true,
   })
-  
   @JoinColumn({
     name: "managerId"
   })

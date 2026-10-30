@@ -22,7 +22,7 @@ export class Manager {
   @Column('text')
   managerPhoneNumber: string;
 
-  @OneToOne(() => Location)
+   @OneToOne(() => Location, (location) => location.manager)
   location: Location;
 
   @OneToOne(() => User)
